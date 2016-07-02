@@ -59,7 +59,8 @@ Ivy
     Intent shareIntent = new Intent();
     shareIntent.setAction(Intent.ACTION_SEND);
     shareIntent.setType("image/*");
-
+    // You have to add image file to shareIntent
+    
     String[] filters = new String[]{"dropbox", "com.microsoft.skydrive", "com.google.android.apps.docs", "com.box.android", "com.amazon.drive"};
     FilteredIntent filteredIntent = FilteredIntent.newInstance(MainActivity.this, shareIntent);
     filteredIntent.startIntent("Share file to clouds", filters);
