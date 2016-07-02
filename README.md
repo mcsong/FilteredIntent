@@ -2,9 +2,9 @@
 This library helps to select apps when you want to share text or file to other apps. 
 
 ## Features
-- You can add filters to select apps
-- A filter is app name and package name
-- You can show choosing dialog more easy
+- You can add filters to select apps.
+- A filter is app name and package name.
+- You can show choosing dialog more easy.
 
 ## Gradle & Maven
 Gradle
@@ -33,7 +33,7 @@ Ivy
 
 ## Usage
 ### Example 1
-- Show sns apps for sharing "text/plain" contents
+- Show sns apps for sharing "text/plain" contents.
 
 ``` java
     Intent shareIntent = new Intent();
@@ -53,7 +53,7 @@ Ivy
 ```
 
 ### Example 2
-- Show only cloud apps for sharing image file
+- Show only cloud apps for sharing image file.
 
 ``` java
     Intent shareIntent = new Intent();
