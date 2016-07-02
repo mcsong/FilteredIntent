@@ -32,7 +32,7 @@ Ivy
 
 ##Screenshots
 
-<img src="https://raw.githubusercontent.com/mcsong/FilteredIntent/master/screenshots/Screenshot_20160630-170254.png"  width="240" height="480" />&nbsp;&nbsp;   <img src="https://raw.githubusercontent.com/mcsong/FilteredIntent/master/screenshots/Screenshot_20160630-170254.png"  width="240" height="480" /> 
+<img src="https://raw.githubusercontent.com/mcsong/FilteredIntent/master/screenshots/Screenshot_20160630-170244.png"  width="320" height="540" />&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/mcsong/FilteredIntent/master/screenshots/Screenshot_20160630-170254.png"  width="320" height="540" /> 
 
 ## Usage
 ### Example 1
