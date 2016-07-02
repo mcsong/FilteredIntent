@@ -30,6 +30,9 @@ Ivy
 </dependency>
 ```
 
+##Screenshots
+
+<img src="https://raw.githubusercontent.com/mcsong/FilteredIntent/master/screenshots/Screenshot_20160630-170254.png"  width="240" height="480" />&nbsp;&nbsp;   <img src="https://raw.githubusercontent.com/mcsong/FilteredIntent/master/screenshots/Screenshot_20160630-170254.png"  width="240" height="480" /> 
 
 ## Usage
 ### Example 1
