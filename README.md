@@ -1,4 +1,7 @@
 # FilteredIntent
+[![Release](https://img.shields.io/badge/jcenter-1.0.0-blue.svg)](https://bintray.com/mcsong/maven/filteredintent)
+
+## Overview
 This library helps to select apps when you want to share text or file to other apps. 
 
 ## Features
