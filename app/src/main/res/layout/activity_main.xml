@@ -19,7 +19,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share text/plain to Sns or Messenger"
+        android:text="Share text/plain to Social networking services or messengers"
         android:id="@+id/main_test01_btn"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
@@ -28,7 +28,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share image/* to Clouds"
+        android:text="Share image/* to Cloud services"
         android:id="@+id/main_test02_btn"
         android:layout_below="@+id/main_test01_btn"
         android:layout_centerHorizontal="true"
