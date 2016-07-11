@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import net.sjava.appstore.PlayAppStore;
 import net.sjava.filteredintent.FilteredIntent;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mTextShareButton;
     private Button mImageShareButton;
+    private Button mImageShareWithoudAppButton;
 
 
     @Override
@@ -21,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTextShareButton = (Button)findViewById(R.id.main_test01_btn);
         mImageShareButton = (Button)findViewById(R.id.main_test02_btn);
+        mImageShareWithoudAppButton = (Button)findViewById(R.id.main_test03_btn);
 
 
         mTextShareButton.setOnClickListener(new View.OnClickListener() {
@@ -46,11 +51,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         mImageShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("image/*");
@@ -62,6 +65,33 @@ public class MainActivity extends AppCompatActivity {
                 //FilteredIntent. .create(MainActivity.this, shareIntent).startIntent("share title", filters);
             }
         });
+
+
+
+        mImageShareWithoudAppButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.setType("image/*");
+
+                String[] filters = new String[]{"tv.twitch.android.app"};
+                FilteredIntent filteredIntent = FilteredIntent.newInstance(MainActivity.this, shareIntent);
+                List<Intent> intents = filteredIntent.getFilteredIntents();
+
+                if(intents == null || intents.size() ==0) {
+                    PlayAppStore.newInstance().openApp(MainActivity.this, "tv.twitch.android.app");
+
+                    return;
+                }
+
+                filteredIntent.startIntent("Share file to clouds", filters);
+
+
+                //FilteredIntent. .create(MainActivity.this, shareIntent).startIntent("share title", filters);
+            }
+        });
+
 
     }
 }

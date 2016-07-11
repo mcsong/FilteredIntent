@@ -9,19 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Share text/plain to Social networking services or messengers"
         android:id="@+id/main_test01_btn"
-        android:layout_below="@+id/textView"
+
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp" />
 
@@ -30,8 +23,17 @@
         android:layout_height="wrap_content"
         android:text="Share image/* to Cloud services"
         android:id="@+id/main_test02_btn"
+        android:layout_marginTop="32dp"
         android:layout_below="@+id/main_test01_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp" />
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="If filtered app not found, show app in playmarket"
+        android:id="@+id/main_test03_btn"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/main_test02_btn"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
