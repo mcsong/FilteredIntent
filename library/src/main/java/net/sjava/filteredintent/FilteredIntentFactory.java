@@ -13,6 +13,14 @@ import java.util.List;
  */
 public class FilteredIntentFactory {
 
+    /**
+     * Search and return filtered intent from all of activities
+     *
+     * @param context
+     * @param intent
+     * @param filter
+     * @return
+     */
     public static Intent filter(Context context, Intent intent, String filter) {
         if(context == null || intent == null)
             return null;

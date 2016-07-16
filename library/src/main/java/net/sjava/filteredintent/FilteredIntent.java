@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Filtered intent class
+ *
  * Created by mcsong@gmail.com on 6/30/2016.
  */
 public class FilteredIntent {
@@ -25,6 +27,11 @@ public class FilteredIntent {
         this.mIntent = intent;
     }
 
+    /**
+     * Add category to Intent
+     *
+     * @param category
+     */
     public void addCategory(String category) {
         if(TextUtils.isEmpty(category))
             return;
@@ -32,14 +39,28 @@ public class FilteredIntent {
         mIntent.addCategory(category);
     }
 
+    /**
+     * Add flag to Intent
+     * @param flag
+     */
     public void addFlag(int flag) {
         mIntent.addFlags(flag);
     }
 
+    /**
+     * Return intent instance
+     * @return
+     */
     public Intent getIntent() {
         return mIntent;
     }
 
+    /**
+     * Get all of filtered intent list
+     *
+     * @param filters
+     * @return
+     */
     public List<Intent> getFilteredIntents(String... filters) {
         List<Intent> filteredIntents = new ArrayList<>();
 
