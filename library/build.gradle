@@ -5,7 +5,7 @@ publish {
     userOrg = 'mcsong'
     groupId = 'net.sjava'
     artifactId = 'filteredintent'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.2'
     desc = 'Android intent filter library'
     website = 'https://github.com/mcsong/FilteredIntent'
     issueTracker = "${website}/issues"
@@ -29,7 +29,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.2"
     }
 
     buildTypes {
@@ -43,10 +43,21 @@ android {
         abortOnError false
     }
 
+    allprojects {
+        tasks.withType(Javadoc).all { enabled = false }
+    }
+
+    if (JavaVersion.current().isJava8Compatible()) {
+        allprojects {
+            tasks.withType(Javadoc) {
+                options.addStringOption('Xdoclint:none', '-quiet')
+            }
+        }
+    }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:24.1.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.2.0'
 }

@@ -13,7 +13,7 @@ This library helps to select apps when you want to share text or file to other a
 Gradle
 ```groovy
     dependencies {
-    	compile 'net.sjava:filteredintent:1.0.0'
+    	compile 'net.sjava:filteredintent:1.0.2'
     }
 ```
 
@@ -22,13 +22,13 @@ Maven
     <dependency>
      <groupId>net.sjava</groupId>
      <artifactId>filteredintent</artifactId>
-     <version>1.0.0</version>
+     <version>1.0.2</version>
     </dependency>
 ```
 
 Ivy
 ```
-<dependency org='net.sjava' name='filteredintent' rev='1.0.0'> 
+<dependency org='net.sjava' name='filteredintent' rev='1.0.2'> 
     <artifact name='$AID' ext='pom'></artifact> 
 </dependency>
 ```
