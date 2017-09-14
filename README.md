@@ -1,6 +1,10 @@
 # FilteredIntent
 [![Release](https://img.shields.io/badge/jcenter-1.0.0-blue.svg)](https://bintray.com/mcsong/maven/filteredintent)
 
+<a href='https://ko-fi.com/mcsong' target='_blank'>
+	<img height='34' style='border:0px;height:34px;' src='https://az743702.vo.msecnd.net/cdn/kofi4.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+</a>
+
 ## Overview
 This library helps to select apps when you want to share text or file to other apps. 
 
