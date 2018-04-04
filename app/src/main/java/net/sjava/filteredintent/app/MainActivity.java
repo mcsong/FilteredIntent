@@ -2,6 +2,7 @@ package net.sjava.filteredintent.app;
 
 import android.content.Intent;
 import android.content.IntentSender;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -66,17 +67,15 @@ public class MainActivity extends AppCompatActivity {
 
                 //filteredIntent.startIntent("Share file to clouds", filters);
 
-	            filteredIntent.startIntent(new AppChosenListener() {
-		            @Override
-		            public void chosen(String appName) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                    filteredIntent.startIntent(new AppChosenListener() {
+                        @Override
+                        public void chosen(String appName) {
+                            Toast.makeText(MainActivity.this, appName, Toast.LENGTH_LONG).show();
+                        }
+                    }, "Share file to clouds", filters);
+                }
 
-
-			            Toast.makeText(MainActivity.this, appName, Toast.LENGTH_LONG).show();
-
-		            }
-	            }, "Share file to clouds", filters);
-
-                //FilteredIntent. .create(MainActivity.this, shareIntent).startIntent("share title", filters);
             }
         });
 

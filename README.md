@@ -80,12 +80,14 @@ Ivy
 - How to get chosen app name.
 
 ``` java
-   filteredIntent.startIntent(new AppChosenListener() {
-		            @Override
-		            public void chosen(String appName) {
-			            Toast.makeText(MainActivity.this, appName, Toast.LENGTH_LONG).show();
-		            }
-	            }, "Share file to clouds", filters);
+       if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            filteredIntent.startIntent(new AppChosenListener() {
+                @Override
+                public void chosen(String appName) {
+                    Toast.makeText(MainActivity.this, appName, Toast.LENGTH_LONG).show();
+                }
+            }, "Share file to clouds", filters);
+        }
 ```
 
 ## License
