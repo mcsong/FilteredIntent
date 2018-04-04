@@ -17,7 +17,7 @@ This library helps to select apps when you want to share text or file to other a
 Gradle
 ```groovy
     dependencies {
-    	compile 'net.sjava:filteredintent:1.0.2'
+    	compile 'net.sjava:filteredintent:1.1.0'
     }
 ```
 
@@ -76,6 +76,17 @@ Ivy
     filteredIntent.startIntent("Share file to clouds", filters);
 ```
 
+### Example 3
+- How to get chosen app name.
+
+``` java
+   filteredIntent.startIntent(new AppChosenListener() {
+		            @Override
+		            public void chosen(String appName) {
+			            Toast.makeText(MainActivity.this, appName, Toast.LENGTH_LONG).show();
+		            }
+	            }, "Share file to clouds", filters);
+```
 
 ## License
 

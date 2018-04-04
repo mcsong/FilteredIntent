@@ -1,12 +1,15 @@
 package net.sjava.filteredintent.app;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import net.sjava.appstore.PlayAppStore;
+import net.sjava.filteredintent.AppChosenListener;
 import net.sjava.filteredintent.FilteredIntent;
 
 import java.util.List;
@@ -60,7 +63,18 @@ public class MainActivity extends AppCompatActivity {
 
                 String[] filters = new String[]{"dropbox", "com.microsoft.skydrive", "com.google.android.apps.docs", "com.box.android", "com.amazon.drive"};
                 FilteredIntent filteredIntent = FilteredIntent.newInstance(MainActivity.this, shareIntent);
-                filteredIntent.startIntent("Share file to clouds", filters);
+
+                //filteredIntent.startIntent("Share file to clouds", filters);
+
+	            filteredIntent.startIntent(new AppChosenListener() {
+		            @Override
+		            public void chosen(String appName) {
+
+
+			            Toast.makeText(MainActivity.this, appName, Toast.LENGTH_LONG).show();
+
+		            }
+	            }, "Share file to clouds", filters);
 
                 //FilteredIntent. .create(MainActivity.this, shareIntent).startIntent("share title", filters);
             }
@@ -85,12 +99,16 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+
+
                 filteredIntent.startIntent("Share file to clouds", filters);
 
 
                 //FilteredIntent. .create(MainActivity.this, shareIntent).startIntent("share title", filters);
             }
         });
+
+
 
 
     }

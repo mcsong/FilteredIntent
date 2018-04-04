@@ -1,12 +1,24 @@
 package net.sjava.filteredintent;
 
+import android.annotation.TargetApi;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentSender;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Parcelable;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Intent.EXTRA_CHOSEN_COMPONENT;
 
 /**
  * Filtered intent class
@@ -110,4 +122,100 @@ public class FilteredIntent {
         chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, filteredIntents.toArray(new Parcelable[filteredIntents.size()]));
         mContext.startActivity(chooser);
     }
+
+
+	private final String BROADCAST_MESSAGE = "net.sjava.filteredintent.APP_CHOSEN_BROAD_CAST";
+
+    @TargetApi(22)
+    public void startIntent(AppChosenListener listener, String title, String... filters) {
+        if(ObjectUtil.isNotNull(listener)) {
+	        mListener = listener;
+        }
+
+    	if(filters == null || filters.length ==0) {
+            startIntent(title);
+            return;
+        }
+
+        List<Intent> filteredIntents = getFilteredIntents(filters);
+        if(filteredIntents.size() == 0) {
+            startIntent(title);
+            return;
+        }
+
+	    registerReceiver();
+
+        Intent tIntent = filteredIntents.remove(0);
+
+	    Intent receiver = new Intent(BROADCAST_MESSAGE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0, receiver, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent chooser = Intent.createChooser(tIntent, title, pendingIntent.getIntentSender());
+        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, filteredIntents.toArray(new Parcelable[filteredIntents.size()]));
+        mContext.startActivity(chooser);
+    }
+
+    private AppChosenListener mListener = null;
+	private BroadcastReceiver mReceiver = null;
+
+	private void registerReceiver(){
+		if(mReceiver != null) {
+			mContext.unregisterReceiver(mReceiver);
+		}
+
+		final IntentFilter theFilter = new IntentFilter();
+		theFilter.addAction(BROADCAST_MESSAGE);
+
+		this.mReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+
+				if(intent.getAction().equals(BROADCAST_MESSAGE)){
+					unRegisterReceiver();
+
+					Object obj = intent.getExtras().get(EXTRA_CHOSEN_COMPONENT);
+					if(obj == null) {
+						return;
+					}
+
+					try {
+						String packageName = ((ComponentName) obj).getPackageName();
+						String appName = getAppNameFromPkgName(context, packageName);
+
+						if(mListener != null) {
+							mListener.chosen(appName);
+						}
+					} catch (Exception e) {
+						// ignore
+					}
+				}
+			}
+		};
+
+		mContext.registerReceiver(this.mReceiver, theFilter);
+	}
+
+	private void unRegisterReceiver() {
+		if(mReceiver != null){
+			mContext.unregisterReceiver(mReceiver);
+			mReceiver = null;
+		}
+
+	}
+
+	private String getAppNameFromPkgName(Context context, String packageName) {
+		if(ObjectUtil.isEmpty(packageName)) {
+			return "";
+		}
+
+		try {
+			PackageManager packageManager = context.getPackageManager();
+			ApplicationInfo info = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+			String appName = (String) packageManager.getApplicationLabel(info);
+			return appName;
+		} catch (PackageManager.NameNotFoundException e) {
+			return "";
+		}
+	}
+
 }
