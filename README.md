@@ -26,13 +26,13 @@ Maven
     <dependency>
      <groupId>net.sjava</groupId>
      <artifactId>filteredintent</artifactId>
-     <version>1.0.2</version>
+     <version>1.1.0</version>
     </dependency>
 ```
 
 Ivy
 ```
-<dependency org='net.sjava' name='filteredintent' rev='1.0.2'> 
+<dependency org='net.sjava' name='filteredintent' rev='1.1.0'>
     <artifact name='$AID' ext='pom'></artifact> 
 </dependency>
 ```
