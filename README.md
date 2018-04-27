@@ -17,7 +17,7 @@ This library helps to select apps when you want to share text or file to other a
 Gradle
 ```groovy
     dependencies {
-    	compile 'net.sjava:filteredintent:1.1.0'
+    	implementation 'net.sjava:filteredintent:1.1.0'
     }
 ```
 
