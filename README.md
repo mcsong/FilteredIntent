@@ -1,5 +1,5 @@
 # FilteredIntent
-[![Release](https://img.shields.io/badge/jcenter-1.0.0-blue.svg)](https://bintray.com/mcsong/maven/filteredintent)
+[![Release](https://img.shields.io/badge/jcenter-1.2.0-blue.svg)](https://bintray.com/mcsong/maven/filteredintent)
 
 <a href='https://ko-fi.com/mcsong' target='_blank'>
 	<img height='34' style='border:0px;height:34px;' src='https://az743702.vo.msecnd.net/cdn/kofi4.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
@@ -17,7 +17,7 @@ This library helps to select apps when you want to share text or file to other a
 Gradle
 ```groovy
     dependencies {
-    	implementation 'net.sjava:filteredintent:1.1.0'
+    	implementation 'net.sjava:filteredintent:1.2.0'
     }
 ```
 
@@ -26,7 +26,7 @@ Maven
     <dependency>
      <groupId>net.sjava</groupId>
      <artifactId>filteredintent</artifactId>
-     <version>1.1.0</version>
+     <version>1.2.0</version>
     </dependency>
 ```
 
@@ -77,6 +77,23 @@ Ivy
 ```
 
 ### Example 3
+- Show apps without gmail, twitter, facebook, kakao, facebook, and tencent apps. 
+
+``` java
+    Intent shareIntent = new Intent();
+    shareIntent.setAction(Intent.ACTION_SEND);
+    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "share intent subject");
+    shareIntent.putExtra(Intent.EXTRA_TEXT, "share intent value");
+    shareIntent.setType("text/plain");
+    
+    // real
+    String[] withoutFilters = new String[]{"gmail", "twitter", "facebook", "kakao.talk", "com.facebook.orca", "com.tencent.mm"};
+    
+    FilteredIntent filteredIntent = FilteredIntent.newInstance(MainActivity.this, shareIntent);
+    filteredIntent.startIntentWithout("Share sns", withoutFilters);
+```
+
+### Example 4
 - How to get chosen app name.
 
 ``` java
@@ -92,7 +109,7 @@ Ivy
 
 ## License
 
-Copyright 2016 Justin Song
+Copyright 2018 Justin Song
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

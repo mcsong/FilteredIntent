@@ -89,6 +89,16 @@ public class FilteredIntent {
         return filteredIntents;
     }
 
+	public List<Intent> getFilteredWithoutIntents(String... withOutFilters) {
+		List<Intent> filteredIntents = new ArrayList<>();
+
+		if(withOutFilters == null || withOutFilters.length == 0) {
+			return filteredIntents;
+		}
+
+		return FilteredIntentFactory.filtersWithout(mContext, mIntent, withOutFilters);
+	}
+
     /**
      * Start intent
      *
@@ -117,12 +127,30 @@ public class FilteredIntent {
             return;
         }
 
-        Intent tIntent =filteredIntents.remove(0);
+        Intent tIntent = filteredIntents.remove(0);
         Intent chooser = Intent.createChooser(tIntent, title);
         chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, filteredIntents.toArray(new Parcelable[filteredIntents.size()]));
         mContext.startActivity(chooser);
     }
 
+
+	public void startIntentWithout(String title, String... withoutFilters) {
+		if(withoutFilters == null || withoutFilters.length ==0) {
+			startIntent(title);
+			return;
+		}
+
+		List<Intent> filteredIntents = getFilteredWithoutIntents(withoutFilters);
+		if(filteredIntents.size() == 0) {
+			startIntent(title);
+			return;
+		}
+
+		Intent tIntent = filteredIntents.remove(0);
+		Intent chooser = Intent.createChooser(tIntent, title);
+		chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, filteredIntents.toArray(new Parcelable[filteredIntents.size()]));
+		mContext.startActivity(chooser);
+	}
 
 	private final String BROADCAST_MESSAGE = "net.sjava.filteredintent.APP_CHOSEN_BROAD_CAST";
 

@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mTextShareButton;
     private Button mImageShareButton;
-    private Button mImageShareWithoudAppButton;
+    private Button mImageShareWithoutAppButton;
+    private Button mTextShareWithoutFiltersAppButton;
 
 
     @Override
@@ -27,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextShareButton = (Button)findViewById(R.id.main_test01_btn);
-        mImageShareButton = (Button)findViewById(R.id.main_test02_btn);
-        mImageShareWithoudAppButton = (Button)findViewById(R.id.main_test03_btn);
-
+        mTextShareButton = findViewById(R.id.main_test01_btn);
+        mImageShareButton = findViewById(R.id.main_test02_btn);
+        mImageShareWithoutAppButton = findViewById(R.id.main_test03_btn);
+	    mTextShareWithoutFiltersAppButton = findViewById(R.id.main_test04_btn);
 
         mTextShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,13 +76,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }, "Share file to clouds", filters);
                 }
-
             }
         });
 
-
-
-        mImageShareWithoudAppButton.setOnClickListener(new View.OnClickListener() {
+        mImageShareWithoutAppButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent shareIntent = new Intent();
@@ -94,19 +92,30 @@ public class MainActivity extends AppCompatActivity {
 
                 if(intents == null || intents.size() ==0) {
                     PlayAppStore.newInstance().openApp(MainActivity.this, "tv.twitch.android.app");
-
                     return;
                 }
 
-
-
                 filteredIntent.startIntent("Share file to clouds", filters);
-
-
-                //FilteredIntent. .create(MainActivity.this, shareIntent).startIntent("share title", filters);
             }
         });
 
+
+	    mTextShareWithoutFiltersAppButton.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    Intent shareIntent = new Intent();
+			    shareIntent.setAction(Intent.ACTION_SEND);
+			    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "share intent subject");
+			    shareIntent.putExtra(Intent.EXTRA_TEXT, "share intent value");
+			    shareIntent.setType("text/plain");
+
+			    // real
+			    String[] withoutFilters = new String[]{"gmail", "twitter", "facebook", "kakao.talk", "com.facebook.orca", "com.tencent.mm"};
+
+			    FilteredIntent filteredIntent = FilteredIntent.newInstance(MainActivity.this, shareIntent);
+			    filteredIntent.startIntentWithout("Share sns", withoutFilters);
+		    }
+	    });
 
 
 
