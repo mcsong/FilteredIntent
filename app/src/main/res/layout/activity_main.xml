@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share text/plain to Social networking services or messengers"
+        android:text="Share text/plain to social networking services or messengers"
         android:id="@+id/main_test01_btn"
 
         android:layout_centerHorizontal="true"
@@ -21,7 +21,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share image/* to Cloud services"
+        android:text="Share image/* to cloud storage services"
         android:id="@+id/main_test02_btn"
         android:layout_marginTop="32dp"
         android:layout_below="@+id/main_test01_btn"
@@ -30,7 +30,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="If filtered app not found, show app in playmarket"
+        android:text="If filtered app doesn't exist, open app on play store"
         android:id="@+id/main_test03_btn"
         android:layout_marginTop="37dp"
         android:layout_below="@+id/main_test02_btn"
@@ -39,7 +39,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share text/plain without some apps"
+        android:text="Share text/plain without any filter"
         android:id="@+id/main_test04_btn"
         android:layout_marginTop="37dp"
         android:layout_below="@+id/main_test03_btn"

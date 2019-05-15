@@ -5,7 +5,7 @@ publish {
     userOrg = 'mcsong'
     groupId = 'net.sjava'
     artifactId = 'filteredintent'
-    publishVersion = '1.2.0'
+    publishVersion = '1.2.1'
     desc = 'Android intent filter library'
     website = 'https://github.com/mcsong/FilteredIntent'
     issueTracker = "${website}/issues"
@@ -17,8 +17,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.novoda:bintray-release:0.8.1'
-        //classpath 'com.novoda:bintray-release:0.3.4'
+        classpath 'com.novoda:bintray-release:0.9.1'
     }
 }
 

@@ -29,5 +29,5 @@ dependencies {
     implementation project(path: ':library')
     //testCompile 'junit:junit:4.12'
     implementation  'com.android.support:appcompat-v7:28.0.0'
-    implementation  'net.sjava:appstore:1.0.8'
+    implementation  'net.sjava:appstore:1.0.9'
 }

@@ -1,5 +1,5 @@
 # FilteredIntent
-[![Release](https://img.shields.io/badge/jcenter-1.2.0-blue.svg)](https://bintray.com/mcsong/maven/filteredintent)
+[![Release](https://img.shields.io/badge/jcenter-1.2.1-blue.svg)](https://bintray.com/mcsong/maven/filteredintent)
 
 <a href='https://ko-fi.com/mcsong' target='_blank'>
 	<img height='34' style='border:0px;height:34px;' src='https://az743702.vo.msecnd.net/cdn/kofi4.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
@@ -21,7 +21,7 @@ Gradle
         implementation 'net.sjava:filteredintent:1.2.0_s27.1.1'
         
         // for 28.0.0 
-    	implementation 'net.sjava:filteredintent:1.2.0'
+    	implementation 'net.sjava:filteredintent:1.2.1'
     }
 ```
 
@@ -30,13 +30,13 @@ Maven
     <dependency>
      <groupId>net.sjava</groupId>
      <artifactId>filteredintent</artifactId>
-     <version>1.2.0</version>
+     <version>1.2.1</version>
     </dependency>
 ```
 
 Ivy
 ```
-<dependency org='net.sjava' name='filteredintent' rev='1.1.0'>
+<dependency org='net.sjava' name='filteredintent' rev='1.2.1'>
     <artifact name='$AID' ext='pom'></artifact> 
 </dependency>
 ```
@@ -113,7 +113,7 @@ Ivy
 
 ## License
 
-Copyright 2018 Justin Song
+Copyright 2019 Justin Song
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
