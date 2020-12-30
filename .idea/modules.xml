@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FilteredIntent.iml" filepath="$PROJECT_DIR$/FilteredIntent.iml" group="FilteredIntent" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="FilteredIntent/app" />
-      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" group="FilteredIntent/library" />
+      <module fileurl="file://$PROJECT_DIR$/FilteredIntent.iml" filepath="$PROJECT_DIR$/FilteredIntent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/FilteredIntent.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/FilteredIntent.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/FilteredIntent.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/FilteredIntent.library.iml" />
     </modules>
   </component>
 </project>

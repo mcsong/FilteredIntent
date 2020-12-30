@@ -7,13 +7,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Parcelable;
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +24,7 @@ import static android.content.Intent.EXTRA_CHOSEN_COMPONENT;
  * Created by mcsong@gmail.com on 6/30/2016.
  */
 public class FilteredIntent {
+  private static String TAG = FilteredIntent.class.getSimpleName();
 
   public static FilteredIntent newInstance(Context context, Intent intent) {
     return new FilteredIntent(context, intent);
@@ -45,9 +44,9 @@ public class FilteredIntent {
    * @param category
    */
   public void addCategory(String category) {
-    if (TextUtils.isEmpty(category))
+    if (TextUtils.isEmpty(category)) {
       return;
-
+    }
     mIntent.addCategory(category);
   }
 
@@ -77,17 +76,16 @@ public class FilteredIntent {
    */
   public List<Intent> getFilteredIntents(String... filters) {
     List<Intent> filteredIntents = new ArrayList<>();
-
-    if (filters == null || filters.length == 0) {
+    if (ObjectUtil.isEmpty(filters)) {
       return filteredIntents;
     }
 
     for (String filter : filters) {
       Intent filterIntent = FilteredIntentFactory.filter(mContext, mIntent, filter);
-      if (filterIntent != null)
+      if (filterIntent != null) {
         filteredIntents.add(filterIntent);
+      }
     }
-
     return filteredIntents;
   }
 
@@ -137,7 +135,7 @@ public class FilteredIntent {
 
 
   public void startIntentWithout(String title, String... withoutFilters) {
-    if (withoutFilters == null || withoutFilters.length == 0) {
+    if (ObjectUtil.isEmpty(withoutFilters)) {
       startIntent(title);
       return;
     }
@@ -150,7 +148,7 @@ public class FilteredIntent {
 
     Intent tIntent = filteredIntents.remove(0);
     Intent chooser = Intent.createChooser(tIntent, title);
-    chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, filteredIntents.toArray(new Parcelable[filteredIntents.size()]));
+    chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, filteredIntents.toArray(new Parcelable[0]));
     mContext.startActivity(chooser);
   }
 
@@ -211,12 +209,11 @@ public class FilteredIntent {
           try {
             String packageName = ((ComponentName) obj).getPackageName();
             String appName = getAppNameFromPkgName(context, packageName);
-
             if (mListener != null) {
               mListener.chosen(appName);
             }
           } catch (Exception e) {
-            // ignore
+            Log.e(TAG, Log.getStackTraceString(e));
           }
         }
       }
@@ -230,8 +227,8 @@ public class FilteredIntent {
       mContext.unregisterReceiver(mReceiver);
       mReceiver = null;
     }
-
   }
+
 
   private String getAppNameFromPkgName(Context context, String packageName) {
     if (ObjectUtil.isEmpty(packageName)) {
@@ -241,11 +238,11 @@ public class FilteredIntent {
     try {
       PackageManager packageManager = context.getPackageManager();
       ApplicationInfo info = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
-      String appName = (String) packageManager.getApplicationLabel(info);
-      return appName;
+      return (String) packageManager.getApplicationLabel(info);
     } catch (PackageManager.NameNotFoundException e) {
-      return "";
+      Log.e(TAG, Log.getStackTraceString(e));
     }
+    return "";
   }
 
 }

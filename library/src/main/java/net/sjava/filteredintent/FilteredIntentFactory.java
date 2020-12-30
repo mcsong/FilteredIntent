@@ -4,84 +4,99 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by mcsong@gmail.com on 6/30/2016.
  */
 public class FilteredIntentFactory {
 
-  /**
-   * Search and return filtered intent from all of activities
-   *
-   * @param context
-   * @param intent
-   * @param filter
-   * @return
-   */
-  public static Intent filter(Context context, Intent intent, String filter) {
-    if (context == null || intent == null) {
-      return null;
-    }
+	private static PackageManager getPackageManager(Context context) {
+		return context.getPackageManager();
+	}
 
-    List<ResolveInfo> resInfos = context.getPackageManager().queryIntentActivities(intent, 0);
-    if (resInfos == null || resInfos.isEmpty()) {
-      return null;
-    }
+	/**
+	 * Search and return filtered intent from all of activities
+	 *
+	 * @param context
+	 * @param intent
+	 * @param filter
+	 * @return
+	 */
+	@Nullable
+	public static Intent filter(Context context, Intent intent, String filter) {
+		if (ObjectUtil.isAnyEmpty(context, intent)) {
+			return null;
+		}
 
-    Intent resultIntent = (Intent) intent.clone();
+		List<ResolveInfo> resInfos = getPackageManager(context).queryIntentActivities(intent, 0);
+		if (ObjectUtil.isEmpty(resInfos)) {
+			return null;
+		}
 
-    ActivityInfo activityInfo;
-    for (ResolveInfo info : resInfos) {
-      activityInfo = info.activityInfo;
-      if (activityInfo.packageName.toLowerCase().contains(filter)
-          || activityInfo.name.toLowerCase().contains(filter)) {
-        resultIntent.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
-        return resultIntent;
-      }
-    }
+		Intent resultIntent = (Intent) intent.clone();
 
-    return null;
-  }
+		ActivityInfo activityInfo;
+		for (ResolveInfo info : resInfos) {
+			activityInfo = info.activityInfo;
+			if (activityInfo.packageName.toLowerCase().contains(filter)
+				|| activityInfo.name.toLowerCase().contains(filter)) {
+				resultIntent.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
+				return resultIntent;
+			}
+		}
 
-  public static ArrayList<Intent> filtersWithout(Context context,
-                                                 Intent intent, String... withoutFilters) {
-    if (context == null || intent == null || withoutFilters == null) {
-      return null;
-    }
+		return null;
+	}
 
-    List<ResolveInfo> resInfos = context.getPackageManager().queryIntentActivities(intent, 0);
-    if (resInfos == null || resInfos.isEmpty()) {
-      return null;
-    }
+	@Nullable
+	public static ArrayList<Intent> filtersWithout(Context context,
+	                                               Intent intent, String... withoutFilters) {
+		if (ObjectUtil.isAnyEmpty(context, intent, withoutFilters)) {
+			return null;
+		}
 
-    ArrayList<Intent> intents = new ArrayList<>();
+		List<ResolveInfo> resInfos = getPackageManager(context).queryIntentActivities(intent, 0);
+		if (ObjectUtil.isEmpty(resInfos)) {
+			return null;
+		}
 
-    ActivityInfo activityInfo;
-    for (ResolveInfo info : resInfos) {
-      activityInfo = info.activityInfo;
+		ArrayList<Intent> intents = new ArrayList<>();
 
-      String appName = activityInfo.name.toLowerCase();
-      String packageName = activityInfo.packageName.toLowerCase();
-      boolean isRemoved = false;
+		ActivityInfo activityInfo;
+		for (ResolveInfo info : resInfos) {
+			activityInfo = info.activityInfo;
 
-      for (String withoutFilter : withoutFilters) {
-        if (appName.contains(withoutFilter) || packageName.contains(withoutFilter)) {
-          isRemoved = true;
-        }
-      }
+			String appName = activityInfo.name.toLowerCase();
+			String packageName = activityInfo.packageName.toLowerCase();
+			boolean isRemoved = false;
 
-      if (!isRemoved) {
-        Intent i = new Intent();
-        i.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
-        intents.add(i);
-      }
-    }
+			for (String withoutFilter : withoutFilters) {
+				if (appName.contains(withoutFilter) || packageName.contains(withoutFilter)) {
+					isRemoved = true;
+				}
+			}
 
-    return intents;
-  }
+			if (!isRemoved) {
+				Intent i = new Intent();
+				i.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
+				// type and data
+				i.setType(intent.getType()).setData(intent.getData());
+				i.setAction(intent.getAction());
+				i.setFlags(intent.getFlags());
+				i.setClipData(intent.getClipData());
+				i.putExtras(intent.getExtras());
+				intents.add(i);
+			}
+		}
+
+		return intents;
+	}
 
 }

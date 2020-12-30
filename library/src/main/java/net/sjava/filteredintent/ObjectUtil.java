@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by mcsong on 3/2/16.
+ * Created by mcsong@gmail.com on 3/2/16.
  */
 public class ObjectUtil {
 
